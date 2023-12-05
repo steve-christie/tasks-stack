@@ -1,6 +1,7 @@
+import {Page} from "../Page";
 
 export default () => {
     return (
-        <div>Foo</div>
+        <Page>Foo</Page>
     )
 }
