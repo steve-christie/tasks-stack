@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "module": "CommonJS",
+    "target": "ES2017",
+    "noImplicitAny": true,
+    "preserveConstEnums": true,
+    "outDir": "./dist",
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "types": [
+      "node",
+      "mocha",
+      "chai"
+    ]
+  },
+  "include": [
+    "src/**/*",
+    "../../decs.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "../../node_modules",
+    "**/*.spec.ts"
+  ],
+  "ts-node": {
+    "files": true
+  }
+}

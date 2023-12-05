@@ -5870,6 +5870,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"model@workspace:libs/model":
+  version: 0.0.0-use.local
+  resolution: "model@workspace:libs/model"
+  languageName: unknown
+  linkType: soft
+
 "ms@npm:2.1.2":
   version: 2.1.2
   resolution: "ms@npm:2.1.2"

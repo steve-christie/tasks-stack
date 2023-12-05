@@ -3,15 +3,19 @@ import createSagaMiddleware from "redux-saga";
 import {PreloadedState} from "redux";
 import { all, fork } from "redux-saga/effects";
 import logger from "redux-logger";
+import {taskReducer} from "./tasks/TaskReducer";
+import {taskSaga} from "./tasks/TaskSaga";
 
 export type ApplicationState = ReturnType<typeof rootReducer>;
 
 export function* rootSaga() {
     yield all([
+        fork(taskSaga)
     ]);
 }
 
 const rootReducer = combineReducers({
+    tasks: taskReducer
 })
 
 export const setupStore = (preloadedState?: PreloadedState<ApplicationState>) => {
