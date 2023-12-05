@@ -9,11 +9,11 @@
     "ui:test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "model": "portal:../../libs/model",
     "antd": "5.6.3",
     "env-cmd": "^10.1.0",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
+    "model": "portal:../../libs/model",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.3",
