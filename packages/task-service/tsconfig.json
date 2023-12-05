@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "preserveConstEnums": true,
+    "target": "ES2017",
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "baseUrl": "./src",
+    "outDir": "./dist",
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "moduleResolution": "Node",
+    "types": [
+      "node",
+      "mocha",
+      "chai"
+    ]
+  }
+}
