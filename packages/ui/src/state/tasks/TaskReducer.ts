@@ -7,11 +7,12 @@ export interface ITaskState {
 
     fetchingTasks: boolean;
     fetchingTasksError?: string;
-    tasks?: ITask[]
+    tasks: ITask[]
 }
 
 const initialState: ITaskState = {
-    fetchingTasks: false
+    fetchingTasks: false,
+    tasks: []
 }
 
 export const taskReducer = (state: ITaskState = initialState, action: IAction<boolean| string| ITask | ITask[]>) => {
