@@ -1,0 +1,46 @@
+{
+	"name": "model",
+	"version": "1.0.0",
+	"description": "Package providing common interfaces",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build:model": "echo building $npm_package_name && yarn exec rimraf dist && yarn exec tsc --build",
+		"test:model": "nyc mocha --recursive src",
+		"test:model:ci": "CI=true yarn run testLib -- --reporter mocha-junit-reporter --reporter-options mochaFile=junit.xml"
+	},
+	"author": "Steven Christie",
+	"mocha": {
+		"extension": [
+			"spec.ts"
+		],
+		"require": [
+			"ts-node/register",
+			"source-map-support/register"
+		]
+	},
+	"nyc": {
+		"all": true,
+		"extension": [
+			".ts",
+			".tsx"
+		],
+		"exclude": [
+			"**/*.d.ts",
+			"**/*.js",
+			"**/*.spec.ts",
+			"src/index.ts"
+		],
+		"reporter": [
+			"text",
+			"html",
+			"cobertura"
+		],
+		"require": [
+			"ts-node/register"
+		]
+	}
+}

@@ -2,3 +2,4 @@
 .yarn/cache
 *.iml
 node_modules
+**/dist
