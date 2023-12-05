@@ -1,9 +1,4 @@
 {
   "name": "tasks-service",
-  "version": "1.0.0",
-  "dependencies": {
-  },
-  "devDependencies": {
-
-  }
+  "version": "1.0.0"
 }
