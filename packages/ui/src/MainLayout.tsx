@@ -1,9 +1,7 @@
 import {Layout, Menu} from "antd";
-import {landingRoute, menuRoutes} from "./config/Routes";
+import {menuRoutes} from "./config/Routes";
 import {convertRouteToMenuItem, generateRoutes} from "./config/RoutingUtil";
 import {Routes} from "react-router";
-import {Link} from "react-router-dom";
-import {HomeOutlined} from "@ant-design/icons";
 
 const {Header, Footer} = Layout;
 
@@ -14,11 +12,8 @@ export default () => {
     const mainMenuItems = menuRoutes.map((route) => convertRouteToMenuItem(menuTheme, route, []))
 
     return (
-        <Layout>
-            <Header>
-                <Link to={"/landing"}>
-                    <HomeOutlined/>
-                </Link>
+        <Layout className="layout" style={{height: "100%"}}>
+            <Header style={{display: 'flex', alignItems: 'center'}}>
                 <Menu
                     theme="dark"
                     mode="horizontal"
@@ -27,7 +22,7 @@ export default () => {
                 />
             </Header>
             <Routes>
-                {generateRoutes([landingRoute, ...menuRoutes])}
+                {generateRoutes(menuRoutes)}
             </Routes>
             <Footer style={{textAlign: 'center'}}>SC ©2023 Tasks Stack</Footer>
         </Layout>

@@ -1,5 +1,7 @@
+import {Page} from "../Page";
+
 export default () => {
     return (
-        <div>Landing Page</div>
+        <Page>Landing Page</Page>
     )
 }

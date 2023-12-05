@@ -12,7 +12,6 @@ export const Page = (props: PropsWithChildren<IPageProps>) => {
         <Layout.Content className={`${styles.mainContentArea}`}>
             <div
                 className={styles.mainContent}
-                style={{width: "100%",}}
             >
                 {props.children}
             </div>
