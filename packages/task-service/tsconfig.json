@@ -2,11 +2,11 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "declaration": true,
-    "preserveConstEnums": true,
     "target": "ES2017",
     "module": "CommonJS",
     "esModuleInterop": true,
     "noImplicitAny": true,
+    "preserveConstEnums": true,
     "baseUrl": "./src",
     "outDir": "./dist",
     "sourceMap": true,
@@ -17,5 +17,17 @@
       "mocha",
       "chai"
     ]
+  },
+  "include": [
+    "src/**/*",
+    "../../decs.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "../../node_modules",
+    "**/*.spec.ts"
+  ],
+  "ts-node": {
+    "files": true
   }
 }
