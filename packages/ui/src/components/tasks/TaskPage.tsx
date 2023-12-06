@@ -1,5 +1,5 @@
 import {Page} from "../page/Page";
-import {Button, Divider, Form, Modal, Select, Switch} from "antd";
+import {Button, Divider, Form, Modal, Select, Spin, Switch} from "antd";
 import TaskList from "../../components/tasks/TaskList";
 import React, {useState} from "react";
 import {ITask, ITaskState} from "../../state/tasks/TaskReducer";
@@ -7,15 +7,16 @@ import TaskCreateFields from "../forms/TaskCreateFields";
 import styles from "./Task.module.less"
 
 export interface ITaskPageProps {
+    fetchingTasks: boolean
     taskStates: ITaskState[]
     handleCreate: (newTask: Partial<ITask>) => void;
     onDelete: (taskId?: string) => void;
     onUpdate: (task: Partial<ITask>) => void;
 
-    sortByField?: {value: string, label: string};
-    setSortByField: (value: React.SetStateAction<{value: string, label: string}>) => void;
-    sortDirection?: {value: string, label: string};
-    setSortDirection: (value: React.SetStateAction<{value: string, label: string}>) => void;
+    sortByField: string;
+    setSortByField: (value: React.SetStateAction<string>) => void;
+    sortDirection: string;
+    setSortDirection: (value: React.SetStateAction<string>) => void;
     includeCompleted: boolean;
     setIncludeCompleted: (value: React.SetStateAction<boolean>) => void;
 }
@@ -43,8 +44,6 @@ export default (props: ITaskPageProps) => {
                     <Select
                         defaultValue={props.sortByField}
                         onSelect={(event) => {
-                            // eslint-disable-next-line no-console
-                            console.log(event)
                             props.setSortByField(event)
                         }}
                         options={[
@@ -55,7 +54,7 @@ export default (props: ITaskPageProps) => {
                     />
                     <Divider type={"vertical"}/>
                     <Select
-                        defaultValue={{value: "asc", label: "Ascending"}}
+                        defaultValue={props.sortDirection}
                         onChange={(event) => props.setSortDirection(event)}
                         options={[
                             {value: "asc", label: "Ascending"},
@@ -69,11 +68,13 @@ export default (props: ITaskPageProps) => {
                     onChange={(event) => props.setIncludeCompleted(event.valueOf())}
                 />
             </div>
+            { props.fetchingTasks ? <Spin size={"large"}/> : (
             <TaskList
                 taskStates={props.taskStates}
                 onDelete={props.onDelete}
                 onUpdate={props.onUpdate}
             />
+                )}
             <div>
                 <Button type={"primary"} onClick={() => setCreateTaskModalVisible(true)}>
                     Add Task

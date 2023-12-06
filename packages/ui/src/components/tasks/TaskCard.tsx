@@ -41,6 +41,7 @@ export default (props: ITaskCardProps) => {
                             </div>
                             <div>
                                 <Tag color={"purple"}>{props.task.status}</Tag>
+                                <Tag color={"cyan"}>{props.task.assignedTo}</Tag>
                                 <Tag color={"green"}>Created: {dayjs(props.task.createdDate).format("D MMM YYYY")}</Tag>
                                 <Tag color={"volcano"}>Due: {dayjs(props.task.dueDate).format("D MMM YYYY")}</Tag>
                             </div>

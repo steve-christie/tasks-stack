@@ -10,25 +10,17 @@ export default () => {
 
     const dispatch = hooks.useAppDispatch();
 
-    useEffect(() => {
-        dispatch(taskActions.getTasks.request({includeCompleted: false}))
-    }, [])
-
-    const [sortByField, setSortByField] = useState<{value: string, label: string}>({value: "assignedTo", label: "Assignee"})
-    const [sortDirection, setSortDirection] = useState<{value: string, label: string}>(  {value: "asc", label: "Ascending"})
+    const [sortByField, setSortByField] = useState<string>("assignedTo")
+    const [sortDirection, setSortDirection] = useState<string>( "asc")
     const [includeCompleted, setIncludeCompleted] = useState<boolean>(false)
 
-    const {taskStates} = useSelector((state: ApplicationState) => state.tasks);
+    const {taskStates, fetchingTasks} = useSelector((state: ApplicationState) => state.tasks);
 
     useEffect(() => {
         let sortBy;
-// eslint-disable-next-line no-console
-        console.log(sortByField?.value, sortDirection?.value)
-        if (sortByField?.value && sortDirection?.value) {
-            sortBy = `${sortByField.value}::${sortDirection.value}`
+        if (sortByField && sortDirection) {
+            sortBy = `${sortByField}::${sortDirection}`
         }
-// eslint-disable-next-line no-console
-        console.log(sortBy)
         dispatch(taskActions.getTasks.request({
             includeCompleted,
             sortBy
@@ -51,6 +43,7 @@ export default () => {
 
     return (
         <TaskPage
+            fetchingTasks={fetchingTasks}
             taskStates={taskStates}
             onUpdate={handleUpdate}
             onDelete={handleDelete}
