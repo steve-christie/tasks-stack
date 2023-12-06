@@ -3,7 +3,6 @@ import {api} from "./api";
 import {connect} from "./repository/connection";
 import {configureLogger} from "./config/logger";
 
-
 const PORT = process.env.APP_PORT || 9056;
 const HOST = "0.0.0.0";
 
@@ -23,9 +22,7 @@ connect("mongodb://localhost:27017/taskStack")
 
 const server = app.listen(PORT as number, HOST);
 
-console.log(`Running on the ${process.env.NODE_ENV} environment`);
 console.log(`Running on http://${HOST}:${PORT}`);
-
 console.log(`version: 1.0.0 time: ${startTime}`);
 
 export default server;
