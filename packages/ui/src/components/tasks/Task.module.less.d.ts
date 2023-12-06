@@ -1,3 +1,4 @@
+export const taskListFilters: string;
 export const cardTitleRow: string;
 export const cardTitleActors: string;
 export const taskList: string;

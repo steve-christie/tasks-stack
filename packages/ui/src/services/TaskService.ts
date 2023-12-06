@@ -1,12 +1,14 @@
 import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
 import {ITask} from "../state/tasks/TaskReducer";
+import {IFetchTasksFilters} from "../state/tasks/TaskActions";
 
 const options: AxiosRequestConfig = {
     baseURL: "http://localhost:9056/api"
 };
 
-const fetchTasks = async (): Promise<ITask[]> => {
+const fetchTasks = async (opts: IFetchTasksFilters): Promise<ITask[]> => {
     const response: AxiosResponse<ITask[]> = await axios.get("/tasks", {
+        params: opts,
         ...options
     })
 

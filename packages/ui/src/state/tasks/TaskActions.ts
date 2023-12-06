@@ -6,6 +6,11 @@ export const DELETE_TASK: { [id: string]: string } = createRequestTypes("DELETE_
 export const GET_TASKS: { [id: string]: string } = createRequestTypes("GET_TASKS");
 export const UPDATE_TASK: { [id: string]: string } = createRequestTypes("UPDATE_TASK");
 
+export interface IFetchTasksFilters {
+    includeCompleted: boolean,
+    sortBy?: string
+}
+
 const createTask = {
     request: (task: Partial<ITask>) => action(CREATE_TASK[REQUEST], task),
     success: (createdTask: ITask) => action(CREATE_TASK[SUCCESS], createdTask),
@@ -19,7 +24,7 @@ const deleteTask = {
 };
 
 const getTasks = {
-    request: () => action(GET_TASKS[REQUEST]),
+    request: (opts: IFetchTasksFilters) => action(GET_TASKS[REQUEST], opts),
     success: (tasks: ITask[]) => action(GET_TASKS[SUCCESS], tasks),
     failure: (error: string) => action(GET_TASKS[FAILURE], error)
 };

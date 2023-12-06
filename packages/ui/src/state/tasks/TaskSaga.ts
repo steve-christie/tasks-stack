@@ -1,5 +1,5 @@
 import {all, call, put, takeLatest} from "redux-saga/effects";
-import {CREATE_TASK, DELETE_TASK, GET_TASKS, taskActions, UPDATE_TASK} from "./TaskActions";
+import {CREATE_TASK, DELETE_TASK, GET_TASKS, IFetchTasksFilters, taskActions, UPDATE_TASK} from "./TaskActions";
 import {IAction, REQUEST} from "../ReducerUtil";
 import {taskService} from "../../services/TaskService";
 import {ITask} from "./TaskReducer";
@@ -23,9 +23,9 @@ export function* deleteTaskSaga(action: IAction<string>) {
     }
 }
 
-export function* fetchTasksSaga() {
+export function* fetchTasksSaga(action: IAction<IFetchTasksFilters>) {
     try {
-        const taskResults: ITask[] = yield call(taskService.fetchTasks)
+        const taskResults: ITask[] = yield call(taskService.fetchTasks, action.payload)
         yield put(taskActions.getTasks.success(taskResults))
     } catch (e) {
         yield put(taskActions.getTasks.failure("An error occurred fetching tasks"))
