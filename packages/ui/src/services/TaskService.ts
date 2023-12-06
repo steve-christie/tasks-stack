@@ -1,26 +1,45 @@
 import {ITask} from "model";
+import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
+
+const options: AxiosRequestConfig = {
+    baseURL: "http://localhost:9056/api"
+};
 
 const fetchTasks = async (): Promise<ITask[]> => {
-    //TODO - Replace with API integration
+    const response: AxiosResponse<ITask[]> = await axios.get("/tasks", {
+        ...options
+    })
 
-    await setTimeout(() => {
-        //Wait for loading
-    }, 2000)
+    return response.data
+}
 
-    return Promise.resolve([
-        {
-            title: "Task title 1!",
-            content: ""
-        }, {
-            title: "Task title 2!",
-            content: "foo",
-        }, {
-            title: "Task title 3!",
-            content: "bar",
-        }
-    ])
+const createTask = async (newTask: Partial<ITask>): Promise<ITask> => {
+    const response: AxiosResponse<ITask> = await axios.post("/tasks", newTask, {
+        ...options
+    })
+
+    return response.data
+}
+
+const deleteTask = async (taskId: string): Promise<void> => {
+    await axios.delete(`/tasks/${taskId}`, {
+        ...options
+    })
+
+    return Promise.resolve()
+}
+
+const updateTask = async (task: Partial<ITask>): Promise<ITask> => {
+    const response: AxiosResponse<ITask> = await axios.put(`/tasks/${task.taskId}`, task, {
+        ...options
+    })
+
+    return response.data
 }
 
 export const taskService = {
-    fetchTasks
+    fetchTasks,
+    createTask,
+    deleteTask,
+    updateTask
 }

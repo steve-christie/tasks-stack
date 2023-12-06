@@ -4,6 +4,7 @@ import {ApplicationState} from "../../state/Store";
 import hooks from "../../state/hooks";
 import {useEffect} from "react";
 import {taskActions} from "../../state/tasks/TaskActions";
+import {ITask} from "model";
 
 export default () => {
 
@@ -13,26 +14,33 @@ export default () => {
         dispatch(taskActions.getTasks.request())
     }, [])
 
-    const {tasks} = useSelector((state: ApplicationState) => state.tasks);
+    const {taskStates} = useSelector((state: ApplicationState) => state.tasks);
 
-    const handleCancel = (taskId: string) => {
+    const handleCancel = (taskId?: string) => {
         //TODO Dispatch cancel action
     };
 
-    const handleUpdate = (taskId: string, title: string, content: string) => {
-        //TODO Dispatch update action
+    const handleUpdate = (task: Partial<ITask>) => {
+        dispatch(taskActions.updateTask.request(task))
     };
 
-    const handleDeleteSection = (taskId: string) => {
-        //TODO Dispatch delete action
+    const handleDelete = (taskId?: string) => {
+        if (taskId) {
+            dispatch(taskActions.deleteTask.request(taskId))
+        }
+    }
+
+    const handleCreate = (newTask: Partial<ITask>) => {
+        dispatch(taskActions.createTask.request(newTask))
     }
 
     return (
         <TaskPage
-            tasks={tasks}
+            taskStates={taskStates}
             onCancel={handleCancel}
             onUpdate={handleUpdate}
-            onDelete={handleDeleteSection}
+            onDelete={handleDelete}
+            handleCreate={handleCreate}
         />
     )
 }

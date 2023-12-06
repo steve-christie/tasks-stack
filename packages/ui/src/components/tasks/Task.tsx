@@ -3,19 +3,18 @@ import {Button, Card, Input, Space, Spin, Tooltip, Typography} from "antd";
 import styles from "./Task.module.less";
 import {CheckCircleOutlined, CloseCircleOutlined, EditOutlined, MinusCircleOutlined} from "@ant-design/icons";
 import {useCallback, useEffect, useState} from "react";
+import {ITaskState} from "../../state/tasks/TaskReducer";
 
-export interface ITaskProps {
+export interface ITaskProps extends ITaskState {
     task: ITask,
-    isUpdating?: boolean;
-    onDelete: (taskId: string) => void;
-    onUpdate: (taskId: string, title: string, content: string) => void;
-    onCancel: (taskId: string) => void;
+    onDelete: (taskId?: string) => void;
+    onUpdate: (task: Partial<ITask>) => void;
+    onCancel: (taskId?: string) => void;
 }
 
 export default (props: ITaskProps) => {
 
     const [title, setTitle] = useState<string>(props.task.title);
-    const [content, setContent] = useState<string>(props.task.content);
 
     useEffect(() => {
         setTitle(props.task.title);
@@ -27,17 +26,16 @@ export default (props: ITaskProps) => {
         setTitle(newTitle);
     };
 
-    const handleContentChange = (newContent: string) => {
-        setContent(newContent);
-    };
-
     const handleUpdate = useCallback(() => {
-        props.onUpdate(props.task.taskId, title, content);
-    }, [title, content]);
+        props.onUpdate({
+            taskId: props.task.taskId,
+            title
+        });
+    }, [title]);
 
     return (
         <Card>
-            {props.isUpdating ? (
+            {props.updatingTask ? (
                 <Spin/>
             ) : (
                 <Space direction="vertical" size={16} style={{width: "100%"}}>
@@ -91,13 +89,6 @@ export default (props: ITaskProps) => {
                             </Tooltip>
                         </div>
                     </div>
-                    {isEditing ? (
-                        <Input.TextArea placeholder={"Enter task content..."}
-                                        defaultValue={content}
-                                        onChange={(event) => handleContentChange(event.target.value)}/>
-                    ) : (
-                        <Typography.Text>{content}</Typography.Text>
-                    )}
                 </Space>
             )}
         </Card>
