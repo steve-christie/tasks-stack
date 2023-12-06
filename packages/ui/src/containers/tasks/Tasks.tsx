@@ -4,7 +4,7 @@ import {ApplicationState} from "../../state/Store";
 import hooks from "../../state/hooks";
 import {useEffect} from "react";
 import {taskActions} from "../../state/tasks/TaskActions";
-import {ITask} from "model";
+import {ITask} from "../../state/tasks/TaskReducer";
 
 export default () => {
 
@@ -15,10 +15,6 @@ export default () => {
     }, [])
 
     const {taskStates} = useSelector((state: ApplicationState) => state.tasks);
-
-    const handleCancel = (taskId?: string) => {
-        //TODO Dispatch cancel action
-    };
 
     const handleUpdate = (task: Partial<ITask>) => {
         dispatch(taskActions.updateTask.request(task))
@@ -37,7 +33,6 @@ export default () => {
     return (
         <TaskPage
             taskStates={taskStates}
-            onCancel={handleCancel}
             onUpdate={handleUpdate}
             onDelete={handleDelete}
             handleCreate={handleCreate}

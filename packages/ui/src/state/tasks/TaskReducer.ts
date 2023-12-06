@@ -1,8 +1,13 @@
-import {ITask} from "model";
+import {ITask as ITaskModel} from "model";
 import {FAILURE, IAction, REQUEST, SUCCESS} from "../ReducerUtil";
 import {CREATE_TASK, DELETE_TASK, GET_TASKS, UPDATE_TASK} from "./TaskActions";
-import {b} from "vitest/dist/reporters-5f784f42";
-import {act} from "react-dom/test-utils";
+
+
+export interface ITask extends Omit<ITaskModel, "createdDate" | "completedDate" | "dueDate"> {
+    createdDate: string,
+    completedDate: string
+    dueDate: string
+}
 
 export interface ITaskState {
     deletingTask: boolean,
