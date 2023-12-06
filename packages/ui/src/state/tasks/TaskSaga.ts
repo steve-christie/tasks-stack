@@ -1,8 +1,8 @@
 import {all, call, put, takeLatest} from "redux-saga/effects";
 import {CREATE_TASK, DELETE_TASK, GET_TASKS, taskActions, UPDATE_TASK} from "./TaskActions";
 import {IAction, REQUEST} from "../ReducerUtil";
-import { ITask } from "model";
 import {taskService} from "../../services/TaskService";
+import {ITask} from "./TaskReducer";
 
 
 export function* createNewTaskSaga(action: IAction<Partial<ITask>>) {

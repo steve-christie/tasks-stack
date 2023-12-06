@@ -1,16 +1,15 @@
 import {Page} from "../page/Page";
-import {Button, Form, Input, Modal} from "antd";
+import {Button, Form, Modal } from "antd";
 import TaskList from "../../components/tasks/TaskList";
-import {ITask} from "model";
 import {useState} from "react";
-import {ITaskState} from "../../state/tasks/TaskReducer";
+import {ITask, ITaskState} from "../../state/tasks/TaskReducer";
+import TaskCreateFields from "../modals/TaskCreateFields";
 
 export interface ITaskPageProps {
     taskStates: ITaskState[]
     handleCreate: (newTask: Partial<ITask>) => void;
     onDelete: (taskId?: string) => void;
     onUpdate: (task: Partial<ITask>) => void;
-    onCancel: (taskId?: string) => void;
 }
 
 export default (props: ITaskPageProps) => {
@@ -19,10 +18,11 @@ export default (props: ITaskPageProps) => {
     const [form] = Form.useForm()
 
     const handleCreateWIthForm = () => {
-        const title = form.getFieldValue("title")
+        const formValues = form.getFieldsValue();
 
         props.handleCreate({
-          title,
+            ...formValues,
+            dueDate: formValues.dueDate.toISOString()
         })
 
         setCreateTaskModalVisible(false)
@@ -34,7 +34,6 @@ export default (props: ITaskPageProps) => {
                 taskStates={props.taskStates}
                 onDelete={props.onDelete}
                 onUpdate={props.onUpdate}
-                onCancel={props.onCancel}
             />
             <div>
                 <Button type={"primary"} onClick={() => setCreateTaskModalVisible(true)}>
@@ -46,10 +45,8 @@ export default (props: ITaskPageProps) => {
                     onOk={() => handleCreateWIthForm()}
                     onCancel={() => setCreateTaskModalVisible(false)}
                 >
-                    <Form form={form}>
-                        <Form.Item name={"title"}>
-                            <Input placeholder={"Enter task title"}/>
-                        </Form.Item>
+                    <Form form={form} layout="vertical" >
+                       <TaskCreateFields/>
                     </Form>
                 </Modal>
             </div>

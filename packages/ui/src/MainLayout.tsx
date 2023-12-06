@@ -24,7 +24,7 @@ export default () => {
             <Routes>
                 {generateRoutes(menuRoutes)}
             </Routes>
-            <Footer style={{textAlign: 'center'}}>SC ©2023 Tasks Stack</Footer>
+            {/*<Footer style={{textAlign: 'center'}}>SC ©2023 Tasks Stack</Footer>*/}
         </Layout>
     )
 }

@@ -1,5 +1,5 @@
 import {action, createRequestTypes, FAILURE, REQUEST, SUCCESS} from "../ReducerUtil";
-import {ITask} from "model";
+import {ITask} from "./TaskReducer";
 
 export const CREATE_TASK: { [id: string]: string } = createRequestTypes("CREATE_TASK");
 export const DELETE_TASK: { [id: string]: string } = createRequestTypes("DELETE_TASK");

@@ -1,5 +1,5 @@
-import {ITask} from "model";
 import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
+import {ITask} from "../state/tasks/TaskReducer";
 
 const options: AxiosRequestConfig = {
     baseURL: "http://localhost:9056/api"
