@@ -9,7 +9,7 @@ export default () => {
                 <Radio.Group>
                     <Radio.Button value="To Do">To Do</Radio.Button>
                     <Radio.Button value="In Progress">In Progress</Radio.Button>
-                    <Radio.Button value="Completed">Completed</Radio.Button>
+                    <Radio.Button value="Complete">Completed</Radio.Button>
                 </Radio.Group>
             </Form.Item>
             <Form.Item name={"completedDate"} label={"Completed Date"} required>

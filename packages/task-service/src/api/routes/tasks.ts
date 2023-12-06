@@ -3,14 +3,36 @@ import {mongoActions} from "../../repository/mongoActions";
 import {ITask} from "model";
 import {v4 as uuid} from "uuid";
 import {logger} from "../../config/logger";
+import {SortOrder} from "mongoose";
 
 export const router: Express = express();
+
+export const unpackSortBy = (sortStr: string) => {
+    if (sortStr.includes("::")) {
+        const parts = sortStr.split("::")
+        const field = parts[0]
+        const direction = parts[1] as SortOrder
+        return {field, direction}
+    }
+}
 
 router.get("/", async (req: Request, res: Response, next: NextFunction) => {
     try {
         logger.info("Request received to list tasks")
 
-        const tasks = await mongoActions.fetchTasks();
+        logger.info(typeof req.query.includeCompleted)
+        const includeCompleted= req.query.includeCompleted === "true";
+        const sortBy = req.query.sortBy as string
+        let sortField;
+        let sortDir;
+
+        if (sortBy) {
+            const {field, direction} = unpackSortBy(sortBy)
+            sortField = field
+            sortDir = direction
+        }
+
+        const tasks = await mongoActions.fetchTasks(includeCompleted, sortField, sortDir);
         res.send(tasks)
     } catch (e) {
         next(e)

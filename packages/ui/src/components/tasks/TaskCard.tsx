@@ -3,7 +3,7 @@ import styles from "./Task.module.less";
 import {EditOutlined, MinusCircleOutlined} from "@ant-design/icons";
 import React from "react";
 import {ITask} from "../../state/tasks/TaskReducer";
-import TaskEditFields from "../modals/TaskEditFields";
+import TaskEditFields from "../forms/TaskEditFields";
 import dayjs from "dayjs";
 import UserBadge from "../badges/user-badge/UserBadge";
 
