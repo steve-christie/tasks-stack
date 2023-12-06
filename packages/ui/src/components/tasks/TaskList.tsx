@@ -1,22 +1,24 @@
 import {ITask} from "model";
 import Task from "./Task";
 import styles from "./Task.module.less";
+import {ITaskState} from "../../state/tasks/TaskReducer";
 
 export interface ITaskListProps {
-    tasks: ITask[]
-    onDelete: (taskId: string) => void;
-    onUpdate: (taskId: string, title: string, content: string) => void;
-    onCancel: (taskId: string) => void;
+    taskStates: ITaskState[]
+    onDelete: (taskId?: string) => void;
+    onUpdate: (task: Partial<ITask>) => void;
+    onCancel: (taskId?: string) => void;
 }
 
 export default (props: ITaskListProps) => {
 return (
     <div className={styles.taskList}>
-        {props.tasks.map(task => (
-            <Task task={task}
+        {props.taskStates.map(taskState => (
+            <Task
                   onDelete={props.onDelete}
                   onUpdate={props.onUpdate}
                   onCancel={props.onCancel}
+                  {...taskState}
             />
         ))}
     </div>

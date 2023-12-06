@@ -1,19 +1,24 @@
-import express, { Express, Request, Response } from 'express';
+import express, {Express, Request, Response, NextFunction} from 'express';
 import {mongoActions} from "../../repository/mongoActions";
 import {ITask} from "model";
-import { v4 as uuid } from "uuid";
+import {v4 as uuid} from "uuid";
 import {logger} from "../../config/logger";
 
 export const router: Express = express();
 
-router.get("/", async (req: Request, res: Response) => {
-    logger.info("Request received to list tasks")
+router.get("/", async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        logger.info("Request received to list tasks")
 
-    const tasks = await mongoActions.fetchTasks();
-    res.send(tasks)
+        const tasks = await mongoActions.fetchTasks();
+        res.send(tasks)
+    } catch (e) {
+        next(e)
+    }
 })
 
-router.post("/", async (req: Request, res: Response) => {
+router.post("/", async (req: Request, res: Response, next: NextFunction) => {
+    try {
     logger.info("Request received to create new task")
 
     const newTask: ITask = req.body
@@ -22,9 +27,13 @@ router.post("/", async (req: Request, res: Response) => {
     const createdTask = await mongoActions.createTask(newTask)
 
     res.send(createdTask)
+    } catch (e) {
+        next(e)
+    }
 })
 
-router.delete("/:taskId", async (req: Request, res: Response) => {
+router.delete("/:taskId", async (req: Request, res: Response, next: NextFunction) => {
+    try {
     const {taskId} = req.params
     logger.info(`Request received to delete task: ${taskId}`)
 
@@ -39,12 +48,19 @@ router.delete("/:taskId", async (req: Request, res: Response) => {
             error: `No task exists matching ID: ${taskId}`
         })
     }
+    } catch (e) {
+        next(e)
+    }
 })
 
-router.put("/:taskId", async (req: Request, res: Response) => {
+router.put("/:taskId", async (req: Request, res: Response, next: NextFunction) => {
+    try {
     const {taskId} = req.params
     const taskChanges: Partial<ITask> = req.body
     const updatedTask = await mongoActions.updateTask(taskId, taskChanges);
     res.send(updatedTask)
+    } catch (e) {
+        next(e)
+    }
 })
 
