@@ -5,20 +5,28 @@
   gap: 2em;
 }
 
-.cardTitleRow {
+.cardWrapper {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 32px;
+  gap: 20px;
+  .cardContent {
+    width: 100%;
 
+    .cardTitleRow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .cardHeader{
+        margin-bottom: 0.8em;
+        margin-top: 0;
+      }
+    }
+  }
   .cardTitleActors {
-    width: 50%;
     display: flex;
     justify-content: flex-end;
   }
-}
-
-.cardDiv {
-  flex: 1;
-  margin-right: 10px
 }

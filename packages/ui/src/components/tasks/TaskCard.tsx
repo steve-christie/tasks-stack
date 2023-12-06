@@ -5,6 +5,7 @@ import React from "react";
 import {ITask} from "../../state/tasks/TaskReducer";
 import TaskEditFields from "../modals/TaskEditFields";
 import dayjs from "dayjs";
+import UserBadge from "../badges/user-badge/UserBadge";
 
 export interface ITaskCardProps {
     task: ITask;
@@ -25,8 +26,25 @@ export default (props: ITaskCardProps) => {
                 <Spin/>
             ) : (
                 <Space direction="vertical" size={16} style={{width: "100%"}}>
-                    <div className={styles.cardTitleRow}>
-                        <Typography.Title level={3}>{props.task.title}</Typography.Title>
+                    <div className={styles.cardWrapper}>
+                        <div>
+                            <UserBadge name={props.task.assignedTo}/>
+                        </div>
+                        <div className={styles.cardContent}>
+                            <div className={styles.cardTitleRow}>
+                                <Typography.Title
+                                    level={5}
+                                    className={styles.cardHeader}
+                                >
+                                    {props.task.title}
+                                </Typography.Title>
+                            </div>
+                            <div>
+                                <Tag color={"purple"}>{props.task.status}</Tag>
+                                <Tag color={"green"}>Created: {dayjs(props.task.createdDate).format("D MMM YYYY")}</Tag>
+                                <Tag color={"volcano"}>Due: {dayjs(props.task.dueDate).format("D MMM YYYY")}</Tag>
+                            </div>
+                        </div>
                         <div className={styles.cardTitleActors}>
                             <Tooltip title={"Edit"}>
                                 <Button icon={<EditOutlined/>} type={"link"}
@@ -41,11 +59,6 @@ export default (props: ITaskCardProps) => {
                                 />
                             </Tooltip>
                         </div>
-                    </div>
-                    <div>
-                        <Tag>{props.task.status}</Tag>
-                        <Tag>Created: {dayjs(props.task.createdDate).format("DD MM YYYY")}</Tag>
-                        <Tag>Due: {dayjs(props.task.dueDate).format("DD MM YYYY")}</Tag>
                     </div>
                 </Space>
             )}

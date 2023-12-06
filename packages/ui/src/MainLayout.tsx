@@ -13,7 +13,7 @@ export default () => {
 
     return (
         <Layout className="layout" style={{height: "100%"}}>
-            <Header style={{display: 'flex', alignItems: 'center'}}>
+            <Header>
                 <Menu
                     theme="dark"
                     mode="horizontal"
