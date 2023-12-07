@@ -1,5 +1,5 @@
-import { Page } from "../../components/page/Page";
+import LandingPage from "../../components/landing/LandingPage";
 
 export default () => {
-  return <Page>Landing Page</Page>;
+  return <LandingPage />;
 };

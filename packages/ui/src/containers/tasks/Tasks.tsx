@@ -13,7 +13,7 @@ export default () => {
   const [sortDirection, setSortDirection] = useState<string>("asc");
   const [includeCompleted, setIncludeCompleted] = useState<boolean>(false);
 
-  const { taskStates, fetchingTasks } = useSelector(
+  const { taskStates, fetchingTasks, fetchingTasksError } = useSelector(
     (state: ApplicationState) => state.tasks
   );
 
@@ -47,6 +47,7 @@ export default () => {
   return (
     <TaskPage
       fetchingTasks={fetchingTasks}
+      fetchingTasksError={fetchingTasksError}
       taskStates={taskStates}
       onUpdate={handleUpdate}
       onDelete={handleDelete}

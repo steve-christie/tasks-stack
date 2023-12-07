@@ -1,7 +1,8 @@
 import { Layout, Menu } from "antd";
 import { menuRoutes } from "./config/Routes";
 import { convertRouteToMenuItem, generateRoutes } from "./config/RoutingUtil";
-import { Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
+import React from "react";
 
 const { Header } = Layout;
 
@@ -22,7 +23,10 @@ export default () => {
           items={mainMenuItems}
         />
       </Header>
-      <Routes>{generateRoutes(menuRoutes)}</Routes>
+      <Routes>
+        <Route path="/" element={<Navigate to="/landing" replace />} />
+        {generateRoutes(menuRoutes)}
+      </Routes>
     </Layout>
   );
 };

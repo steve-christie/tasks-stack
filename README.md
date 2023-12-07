@@ -20,8 +20,9 @@ including the `libs` directory which contains the task model used by both the fr
 
 The service is designed to work with mongo, as such it will need a mongo connection string in order to connect to the DB.
 
-The db can either be run independently outside the stack or there is config provided in the `docker-compse.yml` file
-for spinning up an instance of mongo.
+The db can either be run independently outside the stack or there is config provided in the [docker-compose.yml](docker-compose.yml) file
+for spinning up an instance of mongo. Mongo started via `docker compose` will attempt to use port 27017. If you already have mongo
+running outside of docker and still want to start up the docker version, you will need to adjust the port config to avoid overlap.
 
 There are two approaches you can take to spin the stack up:
 

@@ -43,6 +43,7 @@ export const taskReducer = (
       return {
         ...state,
         fetchingTasks: true,
+        fetchingTasksError: undefined,
       };
     case GET_TASKS[SUCCESS]:
       return {
