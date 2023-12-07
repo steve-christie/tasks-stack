@@ -82,6 +82,11 @@ router.put("/:taskId", async (req: Request, res: Response, next: NextFunction) =
     try {
         const {taskId} = req.params
         const taskChanges: Partial<ITask> = req.body
+
+        if (taskChanges.status !== "Complete") {
+            taskChanges.completedDate = null;
+        }
+
         const updatedTask = await mongoActions.updateTask(taskId, taskChanges);
         res.send(updatedTask)
     } catch (e) {

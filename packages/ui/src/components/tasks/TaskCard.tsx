@@ -42,8 +42,16 @@ export default (props: ITaskCardProps) => {
                             <div>
                                 <Tag color={"purple"}>{props.task.status}</Tag>
                                 <Tag color={"cyan"}>{props.task.assignedTo}</Tag>
-                                <Tag color={"green"}>Created: {dayjs(props.task.createdDate).format("D MMM YYYY")}</Tag>
-                                <Tag color={"volcano"}>Due: {dayjs(props.task.dueDate).format("D MMM YYYY")}</Tag>
+                                <Tag color={"green"}>
+                                    Created: {dayjs(props.task.createdDate).format("D MMM YYYY")}
+                                </Tag>
+                                <Tag color={"volcano"}>
+                                    Due: {dayjs(props.task.dueDate).format("D MMM YYYY")}
+                                </Tag>
+                                {props.task.completedDate && (
+                                    <Tag color={"geekblue"}>
+                                        Completed: {dayjs(props.task.completedDate).format("D MMM YYYY")}
+                                    </Tag>)}
                             </div>
                         </div>
                         <div className={styles.cardTitleActors}>
@@ -66,15 +74,16 @@ export default (props: ITaskCardProps) => {
             <Modal
                 title={"Edit task"}
                 open={props.editTaskModalVisible}
-                onOk={() => props.handleEditWIthForm()}
+                onOk={() => props.form.submit()}
                 onCancel={() => props.setEditTaskModalVisible(false)}
+                destroyOnClose
             >
-                <Form form={props.form} layout="vertical" initialValues={{
+                <Form onFinish={() => props.handleEditWIthForm()} form={props.form} layout="vertical" initialValues={{
                     ...props.task,
                     dueDate: dayjs(props.task.dueDate),
                     completedDate: props.task.completedDate ? dayjs(props.task.completedDate) : undefined
                 }}>
-                    <TaskEditFields/>
+                    <TaskEditFields form={props.form}/>
                 </Form>
             </Modal>
         </Card>

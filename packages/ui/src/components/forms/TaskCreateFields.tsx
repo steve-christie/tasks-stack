@@ -13,15 +13,24 @@ export default () => {
 
     return  (
         <>
-            <Form.Item name={"title"} label={"Title"} required>
+            <Form.Item name={"title"} label={"Title"} required rules={[{
+                required: true,
+                message: "Please enter a task title"
+            }]}>
                 <Input placeholder={"Enter task title"}/>
             </Form.Item>
-            <Form.Item name={"assignedTo"} label={"Assigned To"} required>
+            <Form.Item name={"assignedTo"} label={"Assigned To"} required rules={[{
+                    required: true,
+                    message: "Please enter a task assignee"
+                }]}>
                 <Select placeholder={"Select task assignee"}
                         options={userOptions}
                 />
             </Form.Item>
-            <Form.Item name={"dueDate"} label={"Due Date"} required>
+            <Form.Item name={"dueDate"} label={"Due Date"} required rules={[{
+                required: true,
+                message: "Please enter a due date"
+            }]}>
                 <DatePicker placeholder={"Select due date"}/>
             </Form.Item>
 
