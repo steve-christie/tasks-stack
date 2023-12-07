@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "tasksvc:build": "echo building $npm_package_name && yarn exec rimraf dist && yarn exec tsc --build",
-    "tasksvc:start": "node ./dist/server.js"
+    "tasksvc:start": "node ./dist/server.js",
+    "tasksvc:lint": "eslint ./ --max-warnings 0 --ext ts"
   },
   "dependencies": {
     "express": "4.18.2",

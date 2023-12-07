@@ -1,7 +1,7 @@
 import express from "express";
-import {api} from "./api";
-import {connect} from "./repository/connection";
-import {configureLogger} from "./config/logger";
+import { api } from "./api";
+import { connect } from "./repository/connection";
+import { configureLogger } from "./config/logger";
 
 const PORT = process.env.APP_PORT || 9056;
 const HOST = "0.0.0.0";
@@ -18,7 +18,7 @@ app.use("/api", api);
 
 configureLogger();
 
-connect("mongodb://localhost:27017/taskStack")
+connect("mongodb://localhost:27017/taskStack");
 
 const server = app.listen(PORT as number, HOST);
 

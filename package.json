@@ -2,8 +2,10 @@
   "name": "tasks-stack",
   "version": "1.0.0",
   "scripts": {
-    "prettier": "prettier \"src/**/*.{ts,tsx}\" --write",
-    "prepare": "husky install"
+    "prettier": "prettier \"*/**/*.{ts,tsx}\" --write",
+    "postinstall": "husky install",
+    "lint": "yarn ui:lint && yarn tasksvc:lint",
+    "test": "echo TODO"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",

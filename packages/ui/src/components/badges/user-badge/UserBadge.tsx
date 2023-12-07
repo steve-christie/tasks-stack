@@ -1,14 +1,10 @@
-import styles from "./UserBadge.module.less"
+import styles from "./UserBadge.module.less";
 
-export default (props: {name: string}) => {
+export default (props: { name: string }) => {
+  const initials = props.name
+    .split(" ")
+    .map((n) => n.charAt(0))
+    .join("");
 
-    const initials = props.name.split(" ").map(n => n.charAt(0)).join("")
-
-
-
-    return (
-        <div className={styles.userBadge}>
-            {initials}
-        </div>
-    )
-}
+  return <div className={styles.userBadge}>{initials}</div>;
+};
