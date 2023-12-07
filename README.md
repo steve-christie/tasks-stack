@@ -5,6 +5,20 @@ This repo houses two main packages:
 1. React UI for rending tasks allowing users to create, update and delete tasks.
 2. ExpressJS service for enabling CRUD actions, with a connection to mongoDB
 
+Quick steps to get the stack running are as follows (See below for more depth)
+
+1. Clone directory and navigate into it. All commands are run from the root of the project.
+2. Run `yarn install`
+3. Run `yarn build:model`
+4. Run `docker compose up -d mongo`
+5. Run `yarn tasksvc:build`
+6. Run `yarn tasksvc:start`
+7. Open up new CLI window and head to the same directory
+7. Run `yarn ui:start`
+
+If any problems occur, stop and re-clone the repo to start from fresh. Then read the following as their may be some extra
+config required for your machine.
+
 ## Running The Stack
 
 ### Prerequisites
@@ -33,17 +47,7 @@ There are two approaches you can take to spin the stack up:
 
 Assuming the installation has completed successfully, the next stage will be to get the front and back ends running.
 
-**Front End**
-
-From any directory inside the project, run `yarn ui:start` in your terminal. Vite is the build tool in use here and will take care of
-spinning up the UI for you.
-
-If successful, you should see the following output in your terminal window:
-
-![yarn ui:start](readme-resources%2Fuistartout.png)
-
-Open up your browser to the local url provided in the output and the UI should show. If you navigate to tasks at this point
-without having already spun up the backend, you'll see a spinner present where the tasks would render.
+Before going forward, run `yarn build:model` as this is used by both the front and back end.
 
 **Back End**
 
@@ -66,6 +70,18 @@ set in the code in [connection.ts](./packages/task-service/src/repository/connec
 
 ![mongoconnectionstring.png](readme-resources%2Fmongoconnectionstring.png)
 
+**Front End**
+
+From any directory inside the project, run `yarn ui:start` in your terminal. Vite is the build tool in use here and will take care of
+spinning up the UI for you.
+
+If successful, you should see the following output in your terminal window:
+
+![yarn ui:start](readme-resources%2Fuistartout.png)
+
+Open up your browser to the local url provided in the output and the UI should show. If you navigate to tasks at this point
+without having already spun up the backend, you'll see a spinner present where the tasks would render.
+
 ### Using Docker
 
 The provided [docker-compose.yml`](./docker-compose.yml) provides a preconfigured experience for accessing the stack.
@@ -74,7 +90,7 @@ Note, once spun up the UI will be accessible on port 5173, not 3000.
 
 **Prerequisites**
 - You must have docker installed.
-- If using windows, it's also recommended to configure your WSL config to ensure docker cannot be allocated too much memory
+- **If using windows, it's also recommended to configure your WSL config to ensure docker cannot be allocated too much memory and subsequently slow down your machine**
 - Assumption is that you are running Compose V2 which uses syntax `docker compose` in the CLI. Deprecated Compose V1 has not been tested, evident by using `docker-compose` in the CLI.
 
 Health checks have not been setup at this time, so the suggested approach below spins up each component separately, allowing time in between for them to start up.
@@ -97,6 +113,68 @@ If changes are made to the code and you'd like to see these in the docker image,
 command.
 
 To tear down afterwards, run `docker compose down`
+
+## Rest API
+
+When the task service is running, the rest API is available at the following endpoint:
+
+`http://<host>:<port>/api/tasks`
+
+### Task Schema
+
+See: [index.ts](libs%2Fmodel%2Fsrc%2Findex.ts)
+
+```typescript
+export type TTaskStatus = "To Do" | "In Progress" | "Complete";
+
+export interface ITask {
+  taskId?: string;
+  title: string;
+  assignedTo: string;
+  createdDate: Date;
+  dueDate?: Date;
+  completedDate?: Date;
+  status: TTaskStatus;
+}
+```
+
+The following operations have been set up:
+
+### /GET Tasks
+
+Method: GET
+
+Path: `/api/tasks`
+
+Returns a list of tasks
+
+Optional Query Params:
+- includeCompleted -> Expects undefined, "true" or "false"
+- sortBy -> Expects either undefined or <field>::<sortDirection>, eg. assignedTo::desc
+
+### /POST Task
+
+Method: POST
+
+Path: `/api/tasks`
+
+Creates a new task. Expects a task object to be passed in, returns created task with taskId
+
+### /DELETE Task
+
+Method: DELETE
+
+Path: `/api/tasks/:taskId`
+
+Deletes task matching the given taskId
+
+### /PUT Task
+
+Method: PUT
+
+Path: `/api/tasks/:taskId`
+
+Updates the task matching the given taskId with the task object provided in the payload
 
 ## Unit Testing
 

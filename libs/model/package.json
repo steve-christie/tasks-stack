@@ -8,7 +8,7 @@
 		"dist"
 	],
 	"scripts": {
-		"build:model": "echo building $npm_package_name && yarn exec rimraf dist && yarn exec tsc --build",
+		"build:model": "echo building $npm_package_name && npx rimraf dist && npx tsc --build",
 		"test:model": "nyc mocha --recursive src",
 		"test:model:ci": "CI=true yarn run testLib -- --reporter mocha-junit-reporter --reporter-options mochaFile=junit.xml"
 	},
