@@ -1,5 +1,14 @@
 import { Page } from "../page/Page";
-import { Button, Divider, Form, Modal, Select, Spin, Switch } from "antd";
+import {
+  Alert,
+  Button,
+  Divider,
+  Form,
+  Modal,
+  Select,
+  Spin,
+  Switch,
+} from "antd";
 import TaskList from "../../components/tasks/TaskList";
 import React, { useState } from "react";
 import { ITask, ITaskState } from "../../state/tasks/TaskReducer";
@@ -8,6 +17,7 @@ import styles from "./Task.module.less";
 
 export interface ITaskPageProps {
   fetchingTasks: boolean;
+  fetchingTasksError?: string;
   taskStates: ITaskState[];
   handleCreate: (newTask: Partial<ITask>) => void;
   onDelete: (taskId?: string) => void;
@@ -39,6 +49,9 @@ export default (props: ITaskPageProps) => {
 
   return (
     <Page>
+      {props.fetchingTasksError && (
+        <Alert message={props.fetchingTasksError} type={"error"} />
+      )}
       <div className={styles.taskListFilters}>
         <div>
           <Select
