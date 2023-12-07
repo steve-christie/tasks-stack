@@ -4,18 +4,13 @@ import viteTsconfigPaths from "vite-tsconfig-paths";
 import eslint from "vite-plugin-eslint";
 import IstanbulPlugin from "vite-plugin-istanbul";
 
-const agGridLogs = [
-  "****************************************************************************************************************",
-  "***************************************** AG Grid Enterprise License *******************************************",
-  "****************************************** License Key Not Found ***********************************************",
-  "* All AG Grid Enterprise features are unlocked.                                                                *",
-  "* This is an evaluation only version, it is not licensed for development projects intended for production.     *",
-  "* If you want to hide the watermark, please email info@ag-grid.com for a trial license.                        *",
-  "****************************************************************************************************************",
-  "****************************************************************************************************************",
-];
 export default defineConfig((props) => {
   const env = loadEnv(props.mode, process.cwd(), "VITE_APP");
+
+  console.log("************************************");
+  console.log(JSON.stringify(env));
+  console.log("************************************");
+
   const envWithProcessPrefix = {
     "process.env": `${JSON.stringify(env)}`,
   };
@@ -51,18 +46,13 @@ export default defineConfig((props) => {
       open: true,
       // this sets a default port to 3000
       port: 3000,
+      host: "0.0.0.0",
     },
     define: {
       ...envWithProcessPrefix,
     },
     test: {
       globals: true,
-
-      onConsoleLog: (log: string): boolean | void => {
-        if (agGridLogs.includes(log)) {
-          return false;
-        }
-      },
       environment: "jsdom",
       setupFiles: "./setupTests.ts",
       testTimeout: 10000,

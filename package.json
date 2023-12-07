@@ -28,7 +28,7 @@
     "rimraf": "3.0.2",
     "source-map-support": "^0.5.21",
     "ts-node": "^5.0.1",
-    "typescript": "^4.6.4"
+    "typescript": "4.9.5"
   },
   "workspaces": [
     "libs/*",

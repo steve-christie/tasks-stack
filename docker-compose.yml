@@ -8,3 +8,24 @@ services:
       - "27017"
     volumes:
       - "./sample-data:/var/sample-data"
+  tasksvc:
+    build:
+      context: .
+      dockerfile: d_svc.Dockerfile
+    ports:
+      - "9057:9057"
+    expose:
+      - "9057"
+    environment:
+      APP_PORT: 9057
+      MONGO_CONNECTION_URI: mongodb://mongo:27017/taskStack
+  ui:
+    build:
+      context: .
+      dockerfile: d_ui.Dockerfile
+    ports:
+      - '5173:5173'
+    expose:
+      - "5173"
+    environment:
+      VITE_APP_TASK_SERVICE_URL: http://tasksvc:9057/api

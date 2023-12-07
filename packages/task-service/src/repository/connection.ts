@@ -1,10 +1,14 @@
 import mongoose from "mongoose";
 import { logger } from "../config/logger";
 import { Task } from "./schema";
+import process from "process";
 
 let connection: typeof mongoose = null;
 
-export const connect = async (connectionString?: string) => {
+const connectionString =
+  process.env.MONGO_CONNECTION_URI || "mongodb://localhost:27017/taskStack";
+
+export const connect = async () => {
   if (connection) {
     logger.info("Using existing database connection");
     return Promise.resolve(connection);

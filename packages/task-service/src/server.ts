@@ -18,7 +18,7 @@ app.use("/api", api);
 
 configureLogger();
 
-connect("mongodb://localhost:27017/taskStack");
+connect();
 
 const server = app.listen(PORT as number, HOST);
 

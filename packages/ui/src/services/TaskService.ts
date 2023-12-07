@@ -3,7 +3,7 @@ import { ITask } from "../state/tasks/TaskReducer";
 import { IFetchTasksFilters } from "../state/tasks/TaskActions";
 
 const options: AxiosRequestConfig = {
-  baseURL: "http://localhost:9056/api",
+  baseURL: import.meta.env.VITE_TASK_SERVICE_URL || "http://localhost:9057/api",
 };
 
 const fetchTasks = async (opts: IFetchTasksFilters): Promise<ITask[]> => {
