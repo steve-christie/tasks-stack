@@ -10,6 +10,7 @@ export const App: FC = () => (
     <HashRouter>
       <Routes>
         <Route path={"/*"} element={<MainLayout />} />
+        <Route path={"*"} element={<MainLayout />} />
       </Routes>
     </HashRouter>
   </Provider>

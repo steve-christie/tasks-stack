@@ -12,6 +12,9 @@ export default defineConfig((props) => {
   };
 
   return {
+    build: {
+      sourcemap: "hidden",
+    },
     css: {
       preprocessorOptions: {
         less: {
