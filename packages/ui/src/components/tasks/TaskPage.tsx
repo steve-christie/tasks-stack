@@ -82,10 +82,11 @@ export default (props: ITaskPageProps) => {
                 <Modal
                     title={"Create task"}
                     open={createTaskModalVisible}
-                    onOk={() => handleCreateWIthForm()}
+                    onOk={() => form.submit()}
                     onCancel={() => setCreateTaskModalVisible(false)}
+                    destroyOnClose
                 >
-                    <Form form={form} layout="vertical" >
+                    <Form onFinish={() => handleCreateWIthForm()} form={form} layout="vertical" >
                        <TaskCreateFields/>
                     </Form>
                 </Modal>
