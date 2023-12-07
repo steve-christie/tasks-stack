@@ -73,6 +73,7 @@ export default (props: ITaskCardProps) => {
               </Tooltip>
               <Tooltip title="Delete">
                 <Button
+                  data-testid={"deleteIcon"}
                   icon={<MinusCircleOutlined />}
                   danger
                   type={"link"}

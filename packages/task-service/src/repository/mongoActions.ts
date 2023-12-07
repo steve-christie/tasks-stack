@@ -13,7 +13,7 @@ const fetchTasks = async (
   includeCompleted?: boolean,
   sortField?: string,
   sortDir?: SortOrder
-) => {
+): Promise<ITask[]> => {
   const filter: FilterQuery<ITask> = {};
 
   if (includeCompleted) {

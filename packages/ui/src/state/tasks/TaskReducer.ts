@@ -10,7 +10,7 @@ import {
 export interface ITask
   extends Omit<ITaskModel, "createdDate" | "completedDate" | "dueDate"> {
   createdDate: string;
-  completedDate: string;
+  completedDate?: string;
   dueDate: string;
 }
 

@@ -4,7 +4,7 @@ export const FAILURE = "FAILURE";
 
 export interface IAction<T> {
   type: string;
-  payload: T | undefined;
+  payload: T;
 }
 
 export const createRequestTypes = (
@@ -27,6 +27,10 @@ export const action = <T extends object | string | boolean>(
 ): IAction<T> => {
   if (!type) {
     throw new Error("You must provide a valid action type");
+  }
+
+  if (payload === undefined) {
+    throw new Error("You must provide a valid action payload");
   }
 
   return { type, payload };
