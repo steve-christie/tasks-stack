@@ -9,21 +9,6 @@ const singleRoute = {
   icon: "",
 };
 
-const nestedRoutes: IRoute[] = [
-  {
-    link: "bar",
-    label: "Bar",
-    component: "",
-    icon: "",
-  },
-  {
-    link: "aaa",
-    label: "AAA",
-    component: "",
-    icon: "",
-  },
-];
-
 const routeWithGroupLabel: IRoute = {
   link: "bar",
   label: "Bar",
