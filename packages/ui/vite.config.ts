@@ -7,10 +7,6 @@ import IstanbulPlugin from "vite-plugin-istanbul";
 export default defineConfig((props) => {
   const env = loadEnv(props.mode, process.cwd(), "VITE_APP");
 
-  console.log("************************************");
-  console.log(JSON.stringify(env));
-  console.log("************************************");
-
   const envWithProcessPrefix = {
     "process.env": `${JSON.stringify(env)}`,
   };
