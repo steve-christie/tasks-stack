@@ -3,26 +3,31 @@ export const SUCCESS = "SUCCESS";
 export const FAILURE = "FAILURE";
 
 export interface IAction<T> {
-	type: string;
-	payload: T;
+  type: string;
+  payload: T;
 }
 
-export const createRequestTypes = (prefix: string): { [id: string]: string } => {
-	if (!prefix) {
-		throw new Error("You must provide a valid prefix");
-	}
+export const createRequestTypes = (
+  prefix: string
+): { [id: string]: string } => {
+  if (!prefix) {
+    throw new Error("You must provide a valid prefix");
+  }
 
-	return {
-		RESET: `${prefix}_RESET`,
-		REQUEST: `${prefix}_REQUEST`,
-		SUCCESS: `${prefix}_SUCCESS`
-	};
+  return {
+    RESET: `${prefix}_RESET`,
+    REQUEST: `${prefix}_REQUEST`,
+    SUCCESS: `${prefix}_SUCCESS`,
+  };
 };
 
-export const action = <T extends object | string | boolean>(type: string, payload?: T): IAction<T | undefined> => {
-	if (!type) {
-		throw new Error("You must provide a valid action type");
-	}
+export const action = <T extends object | string | boolean>(
+  type: string,
+  payload?: T
+): IAction<T | undefined> => {
+  if (!type) {
+    throw new Error("You must provide a valid action type");
+  }
 
-	return { type, payload };
+  return { type, payload };
 };

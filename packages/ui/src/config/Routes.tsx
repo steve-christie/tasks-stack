@@ -1,17 +1,19 @@
 import React from "react";
-import {IRoute} from "./RoutingUtil";
+import { IRoute } from "./RoutingUtil";
 import Tasks from "../containers/tasks/Tasks";
 import Landing from "../containers/landing/Landing";
 
-const menuRoutes: IRoute[] = [{
+const menuRoutes: IRoute[] = [
+  {
     link: "landing",
     label: "Landing",
-    component: <Landing/>
-}, {
+    component: <Landing />,
+  },
+  {
     link: "tasks",
     label: "Tasks",
-    component: <Tasks/>,
-},
+    component: <Tasks />,
+  },
 ];
 
-export {menuRoutes};
+export { menuRoutes };
