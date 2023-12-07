@@ -4,7 +4,8 @@
   "scripts": {
     "prettier": "prettier \"*/**/*.{ts,tsx}\" --write",
     "postinstall": "husky install",
-    "lint": "yarn ui:lint && yarn tasksvc:lint"
+    "lint": "yarn ui:lint && yarn tasksvc:lint",
+    "test": "echo TODO"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
