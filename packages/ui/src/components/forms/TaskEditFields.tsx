@@ -1,18 +1,7 @@
-import { DatePicker, Form, FormInstance, Radio, RadioChangeEvent } from "antd";
+import { DatePicker, Form, FormInstance, Radio } from "antd";
 import TaskCreateFields from "./TaskCreateFields";
-import { useState } from "react";
 
 export default (props: { form: FormInstance }) => {
-  const [completedDateDisabled, setCompletedDateDisabled] = useState<boolean>();
-
-  const handleStatusChange = (event: RadioChangeEvent) => {
-    if (event.target.value === "Complete") {
-      setCompletedDateDisabled(false);
-    } else {
-      setCompletedDateDisabled(true);
-    }
-  };
-
   return (
     <>
       <TaskCreateFields />
@@ -26,7 +15,7 @@ export default (props: { form: FormInstance }) => {
           },
         ]}
       >
-        <Radio.Group onChange={(event) => handleStatusChange(event)}>
+        <Radio.Group>
           <Radio.Button value="To Do">To Do</Radio.Button>
           <Radio.Button value="In Progress">In Progress</Radio.Button>
           <Radio.Button value="Complete">Completed</Radio.Button>

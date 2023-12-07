@@ -3,7 +3,7 @@ import { menuRoutes } from "./config/Routes";
 import { convertRouteToMenuItem, generateRoutes } from "./config/RoutingUtil";
 import { Routes } from "react-router";
 
-const { Header, Footer } = Layout;
+const { Header } = Layout;
 
 const menuTheme = "dark";
 

@@ -1,4 +1,4 @@
-import mongoose, { model } from "mongoose";
+import mongoose from "mongoose";
 import { logger } from "../config/logger";
 import { Task } from "./schema";
 

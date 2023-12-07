@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "prettier": "prettier \"*/**/*.{ts,tsx}\" --write",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "lint": "yarn ui:lint && yarn tasksvc:lint"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
