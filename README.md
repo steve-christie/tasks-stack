@@ -97,3 +97,17 @@ If changes are made to the code and you'd like to see these in the docker image,
 command.
 
 To tear down afterwards, run `docker compose down`
+
+## Unit Testing
+
+In the interests of time, unit tests have not been added for every function. However, if this app were to be productionsed,
+this would be addressed early on with a view to achieving coverage in the region of 75-80%.
+
+However, in the interest of providing a few notable testing approaches, the following has been achieved.
+
+**Front End**
+- UI Component Testing: See [Task.spec.tsx](packages%2Fui%2Fsrc%2Fcomponents%2Ftasks%2FTask.spec.tsx)
+- UI State Testing: See [TaskState.spec.ts](packages%2Fui%2Fsrc%2Fstate%2Ftasks%2FTaskState.spec.ts), includes mocking with sinon and saga tests with redux-saga-test-plan
+
+**Back End**
+- Router Testing: See [tasks.spec.ts](packages%2Ftask-service%2Fsrc%2Fapi%2Froutes%2Ftasks.spec.ts), includes supertest with sinon

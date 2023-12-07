@@ -5,6 +5,7 @@
     "tasksvc:build": "echo building $npm_package_name && yarn exec rimraf dist && yarn exec tsc --build",
     "tasksvc:build:docker": "echo building $npm_package_name && yarn exec tsc --build",
     "tasksvc:start": "node ./dist/server.js",
+    "tasksvc:test": "yarn exec nyc mocha --recursive src",
     "tasksvc:lint": "eslint ./ --max-warnings 0 --ext ts"
   },
   "dependencies": {
@@ -16,6 +17,36 @@
   },
   "devDependencies": {
     "@types/express": "4.17.21",
-    "@types/uuid": "^8.3.4"
+    "@types/supertest": "2.0.16",
+    "@types/uuid": "^8.3.4",
+    "supertest": "6.3.3"
+  },
+  "mocha": {
+    "extension": [
+      "spec.ts"
+    ],
+    "require": [
+      "ts-node/register",
+      "source-map-support/register"
+    ]
+  },
+  "nyc": {
+    "all": true,
+    "extension": [
+      ".ts"
+    ],
+    "exclude": [
+      "**/*.d.ts",
+      "**/*.js",
+      "**/*.spec.ts"
+    ],
+    "reporter": [
+      "text",
+      "html",
+      "cobertura"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
   }
 }
